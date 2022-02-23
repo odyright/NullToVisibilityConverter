@@ -1,0 +1,12 @@
+namespace TD2_WinUI3
+{
+	[default_interface]
+	runtimeclass NullToVisibilityConverter : [default] Windows.UI.Xaml.Data.IValueConverter
+	{
+		NullToVisibilityConverter();
+		static Windows.UI.Xaml.DependencyProperty NullValueProperty{ get; };
+		static Windows.UI.Xaml.DependencyProperty NonNullValueProperty{ get; };
+		IInspectable NullValue;
+		IInspectable NonNullValue;
+	}
+}
