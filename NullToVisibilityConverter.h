@@ -9,26 +9,21 @@ namespace winrt::TD2_WinUI3::implementation
 {
     struct NullToVisibilityConverter : NullToVisibilityConverterT<NullToVisibilityConverter>
     {
-        NullToVisibilityConverter() 
-        {
-            NullValue(winrt::box_value(Microsoft::UI::Xaml::Visibility::Collapsed));
-            NonNullValue(winrt::box_value(Microsoft::UI::Xaml::Visibility::Visible));
-        };
+        NullToVisibilityConverter() = default;
 
-        IInspectable NullValue() { return  GetValue(m_nullValueProperty); };
-        void NullValue(IInspectable const& value) { SetValue(m_nullValueProperty, value); };
-        static DependencyProperty NullValueProperty() { return m_nullValueProperty; };
+        Microsoft::UI::Xaml::Visibility NullValue() noexcept;
+        void NullValue(Microsoft::UI::Xaml::Visibility value) noexcept;
 
-        IInspectable NonNullValue() { return  GetValue(m_nonNullValueProperty); };
-        void NonNullValue(IInspectable const& value) { SetValue(m_nonNullValueProperty, value); };
-        static DependencyProperty NonNullValueProperty() { return m_nonNullValueProperty; };
+        Microsoft::UI::Xaml::Visibility NonNullValue() noexcept;
+        void NonNullValue(Microsoft::UI::Xaml::Visibility value) noexcept;
 
         Windows::Foundation::IInspectable Convert(Windows::Foundation::IInspectable const& value, Windows::UI::Xaml::Interop::TypeName const& targetType, Windows::Foundation::IInspectable const& parameter, hstring const& language);
-        Windows::Foundation::IInspectable ConvertBack(Windows::Foundation::IInspectable const& value, Windows::UI::Xaml::Interop::TypeName const& targetType, Windows::Foundation::IInspectable const& parameter, hstring const& language);
+
+        Windows::Foundation::IInspectable ConvertBack(Windows::Foundation::IInspectable const&, Windows::UI::Xaml::Interop::TypeName const& targetType, Windows::Foundation::IInspectable const&, hstring const& language);
 
     private:
-        static DependencyProperty m_nullValueProperty;
-        static DependencyProperty m_nonNullValueProperty;
+        Microsoft::UI::Xaml::Visibility nullValue = Microsoft::UI::Xaml::Visibility::Collapsed;
+        Microsoft::UI::Xaml::Visibility nonNullValue = Microsoft::UI::Xaml::Visibility::Visible;
     };
 }
 
